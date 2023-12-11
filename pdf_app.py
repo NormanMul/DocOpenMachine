@@ -62,8 +62,8 @@ with st.sidebar:
 if "conversation" not in st.session_state:
     st.session_state.conversation = None
 
-st.markdown(f"""## AI-Assisted Document Analysis 📑 <span style=color:#2E9BF5><font size=5>Beta</font></span>""",unsafe_allow_html=True)
-st.write("_A tool built for AI-Powered Research Assistance or Querying Documents for Quick Information Retrieval_")
+st.markdown(f"""## AI-Assisted Document Analysis 📑 """,unsafe_allow_html=True)
+st.write("OpenMachine GPT Tools")
 
 
 
