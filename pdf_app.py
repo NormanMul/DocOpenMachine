@@ -12,7 +12,6 @@ from langchain.vectorstores import FAISS
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-home_privacy = "We value and respect your privacy. To safeguard your personal details, we utilize the hashed value of your OpenAI API Key, ensuring utmost confidentiality and anonymity. Your API key facilitates AI-driven features during your session and is never retained post-visit. You can confidently fine-tune your research, assured that your information remains protected and private."
 
 # Page configuration for Simple PDF App
 st.set_page_config(
@@ -25,7 +24,7 @@ st.set_page_config(
 # OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 st.sidebar.subheader("Setup")
 OPENAI_API_KEY = st.sidebar.text_input("Enter Your OpenAI API Key:", type="password")
-st.sidebar.markdown("Get your OpenAI API key [here](https://platform.openai.com/account/api-keys)")
+st.sidebar.markdown("Get your OpenAI API key")
 st.sidebar.divider()
 st.sidebar.subheader("Model Selection")
 llm_model_options = ['gpt-3.5-turbo', 'gpt-3.5-turbo-16k','gpt-4']  # Add more models if available
@@ -46,28 +45,14 @@ with st.sidebar:
         """)
 
     st.subheader("Updates Required:", anchor=False)
-    st.warning("""
-        1. Support for multiple PDFs.
-        
-        2. Use Langchain PDF loader and higher quality vector store for document parsing + reduce inefficient handling.
-        
-        3. Improve contextual question-answering by developing Prompt Templates - Tendency to hallucinate.
     
-        """
-        )
 
     st.divider()
 
 with st.sidebar:
-    st.subheader("👨‍💻 Author: **Yaksh Birla**", anchor=False)
-    
-    st.subheader("🔗 Contact / Connect:", anchor=False)
     st.markdown(
         """
-        - [Email](mailto:yb.codes@gmail.com)
-        - [LinkedIn](https://www.linkedin.com/in/yakshb/)
-        - [Github Profile](https://github.com/yakshb)
-        - [Medium](https://medium.com/@yakshb)
+        - OpenMachine
         """
     )
 
@@ -80,31 +65,14 @@ if "conversation" not in st.session_state:
 st.markdown(f"""## AI-Assisted Document Analysis 📑 <span style=color:#2E9BF5><font size=5>Beta</font></span>""",unsafe_allow_html=True)
 st.write("_A tool built for AI-Powered Research Assistance or Querying Documents for Quick Information Retrieval_")
 
-with st.expander("❔How does the report analysis work?"):
-    st.info("""
-    These processes are powered by robust and sophisticated technologies like OpenAI’s Large Language Models, Sentence Transformer, FAISS, and Streamlit, ensuring a reliable and user-friendly experience for users to gain quick insights from their documents.
 
-    1. **Document Upload and Processing**: The tool reads and extracts text from these documents, creating a foundational base of information. During this phase, the documents are also processed into manageable pieces to prepare them for subsequent analysis and querying.
-    
-    2. **Data Transformation and Indexing**: HuggingFace Sentence Transformers convert textual data into numerical vectors. Post-transformation, the data is organized and indexed in a vector database using Meta's FAISS, which is renowned for its efficient search capabilities.
-    
-    3. **Conversational AI**: Using OpenAI's ChatOpenAI model to generate responses, the system retrieves answers based on the information extracted from the uploaded documents while maintaining contextual accuracy.
-    
-    4. **Query Handling and Response Generation**: Each user query is meticulously managed and processed within the tool. The tool ensures a smooth interaction and generates accurate responses based on the ongoing conversation and the available data.
-    
-    The overarching objective is to enable users to query lengthy documents or reports to expedite comprehensive research.
 
-    """, icon="ℹ️")
-
-with st.expander("⚠️ Privacy and Terms of Use"):
+with st.expander("⚠️ Privasi Terms"):
     st.info("""
         **Privacy**: We value and respect your privacy. To safeguard your personal details, we utilize the hashed value of your OpenAI API Key, ensuring utmost confidentiality and anonymity. Your API key facilitates AI-driven features during your session and is never retained post-visit. You can confidently fine-tune your research, assured that your information remains protected and private.
 
         **Terms of Use**: By using this service, users are required to agree to the following terms: The service is a research preview intended for non-commercial use only. 
         It only provides limited safety measures and may generate offensive content. It must not be used for any illegal, harmful, violent, racist, or sexual purposes. 
-        The service may collect user dialogue data for future research. For an optimal experience, please use desktop computers for this demo, as mobile devices may compromise its quality.
-
-        **License**: The service is a research preview intended for non-commercial use only, subject to the model [License](https://huggingface.co/docs/hub/sentence-transformers) HuggingFace embedding models, [Terms of Use](https://openai.com/policies/terms-of-use) of the data generated by OpenAI and Privacy Practices of Langchain. Please contact us if you find any violations.
         """, icon="ℹ️")
 
 # Extracts and concatenates text from a list of PDF documents
